@@ -29,6 +29,7 @@ analysis:
 journal:
   target_name: "International Journal of Surgery"
   profile_id: "ijs"
+  generated_profile_id: "kqips-pneumonia-ijs"
   guideline_url: "https://edmgr.ovid.com/ijs/accounts/ifauth.htm"
 
 harness:

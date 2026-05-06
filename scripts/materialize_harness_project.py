@@ -29,7 +29,11 @@ def resolve_harness(package_root: Path, cfg: dict) -> Path:
 
 
 def build_harness_project(cfg: dict) -> dict:
-    profile_id = cfg["journal"].get("profile_id", "generic-original-research")
+    profile_id = (
+        cfg["journal"].get("generated_profile_id", "").strip()
+        or cfg["journal"].get("profile_id", "").strip()
+        or "generic-original-research"
+    )
     return {
         "project": {
             "slug": cfg["project"]["slug"],

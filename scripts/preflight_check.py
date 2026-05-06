@@ -55,6 +55,10 @@ def main() -> None:
         "harness_exists": harness_path.exists(),
         "zotero_db_exists": zotero_db.exists(),
         "zotero_profiles_exists": profiles_ini.exists(),
+        "guideline_url_present": bool(cfg["journal"].get("guideline_url", "").strip()),
+        "workspace_exists": (package_root / cfg["paths"]["workspace_root"] / cfg["project"]["slug"]).exists(),
+        "journal_intake_exists": (package_root / cfg["paths"]["workspace_root"] / cfg["project"]["slug"] / "journal" / "journal_intake.md").exists(),
+        "profile_mapping_exists": (package_root / cfg["paths"]["workspace_root"] / cfg["project"]["slug"] / "journal" / "profile_mapping.yaml").exists(),
     }
     print(json.dumps(report, indent=2))
 

@@ -34,7 +34,11 @@ def main() -> None:
     cfg = load_yaml(config_path)
     harness_root = resolve_harness(package_root, cfg)
     harness_project = harness_root / "projects" / cfg["project"]["slug"]
-    journal_profile = harness_root / "config" / "journals" / f"{cfg['journal'].get('profile_id', 'generic-original-research')}.yaml"
+    profile_id = (
+        cfg["journal"].get("generated_profile_id", "").strip()
+        or cfg["journal"].get("profile_id", "generic-original-research")
+    )
+    journal_profile = harness_root / "config" / "journals" / f"{profile_id}.yaml"
 
     command = [
         "python3",

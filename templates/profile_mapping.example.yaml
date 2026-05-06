@@ -1,0 +1,16 @@
+journal:
+  id: "custom-journal-profile"
+  display_name: "Custom Journal"
+  article_type: "Original Research"
+  double_blind_review: true
+  citation_style: "numeric-in-order-of-appearance"
+  citation_rendering: "bracketed_numeric"
+  abstract_word_limit: 350
+  body_word_limit_excluding_references: 5000
+  highlights_required: false
+  title_page_required: true
+  figure_legends_separate: true
+  figures_separate: true
+  tables_separate: true
+  supplementary_allowed: true
+  use_harness_default_expected_files: true

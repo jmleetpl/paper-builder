@@ -83,7 +83,45 @@ python3 scripts/create_journal_intake.py config/engine.example.yaml
 
 - 저널 이름만 넣으면 웹에서 저자 가이드라인을 자동 수집하는 기능은 미구현
 
-## 7. 하네스 프로젝트 생성하기
+## 7. 저널 가이드 내려받기
+
+`journal.guideline_url`이 설정돼 있으면:
+
+```bash
+python3 scripts/fetch_journal_guide.py config/engine.example.yaml
+```
+
+이 명령은 저널 가이드 원본을 `journal/` 아래에 저장합니다.
+
+HTML 응답이면 추가로:
+
+- `journal/guideline_notes.md`
+
+도 같이 만들어 빠르게 검토할 수 있게 합니다.
+
+## 8. 프로필 매핑 만들기
+
+먼저:
+
+```bash
+python3 scripts/map_journal_profile.py config/engine.example.yaml
+```
+
+이 명령은:
+
+- `journal/profile_mapping.yaml`
+
+을 만듭니다.
+
+그 다음 사용자가 이 파일을 실제 저널 가이드에 맞게 수정합니다.
+
+수정 후 하네스에 설치:
+
+```bash
+python3 scripts/install_harness_profile.py config/engine.example.yaml
+```
+
+## 9. 하네스 프로젝트 생성하기
 
 ```bash
 python3 scripts/materialize_harness_project.py config/engine.example.yaml
@@ -100,7 +138,24 @@ python3 scripts/materialize_harness_project.py config/engine.example.yaml
 
 즉 이 단계가 끝나면, 실제 논문작업에 들어갈 하네스 프로젝트가 준비됩니다.
 
-## 8. 사전 점검
+## 10. 한 번에 초기 세팅하기
+
+```bash
+python3 scripts/run_setup.py config/engine.example.yaml
+```
+
+이 명령은 아래 순서를 한 번에 실행합니다.
+
+- workspace 생성
+- harness clone
+- journal intake 생성
+- guideline URL이 있으면 guide fetch
+- profile mapping 생성
+- harness profile 설치
+- harness project 생성
+- preflight check
+
+## 11. 사전 점검
 
 ```bash
 python3 scripts/preflight_check.py config/engine.example.yaml
@@ -114,7 +169,7 @@ python3 scripts/preflight_check.py config/engine.example.yaml
 - 하네스 경로
 - Zotero 환경
 
-## 9. 최종 저자 핸드오프
+## 12. 최종 저자 핸드오프
 
 원고와 제출 파일이 정리된 뒤:
 
@@ -124,11 +179,11 @@ python3 scripts/assemble_author_handoff.py config/engine.example.yaml
 
 이 명령은 하네스의 제출 폴더 조립 기능을 감싸서, 저자가 바로 확인할 수 있는 최종 핸드오프 묶음을 만들어 줍니다.
 
-## 10. 현재 한계
+## 13. 현재 한계
 
 - 저널 이름만으로 author guideline 자동 수집은 아직 없음
 - 임의 스키마 데이터에 대한 범용 통계엔진은 아직 없음
 - Word 안의 live Zotero field 자동 삽입은 아직 없음
 - 완전 무인 end-to-end 논문 생성기는 아직 아님
 
-즉 현재 버전은 **실전용 오케스트레이터 v0.1**에 가깝습니다.
+즉 현재 버전은 **실전용 오케스트레이터 v0.2**에 가깝습니다.

@@ -16,6 +16,7 @@
 - journal profile mapper from saved guide notes
 - richer readiness checks
 - multi-project workspace index
+- one-command setup sequence
 
 ## v0.3
 

@@ -73,7 +73,41 @@ It does:
 - save the journal name and optional guideline URL
 - optionally snapshot a matching harness profile if one is already known
 
-## 7. Materialize the harness project
+## 7. Download the journal guide
+
+If `journal.guideline_url` is set:
+
+```bash
+python3 scripts/fetch_journal_guide.py config/engine.example.yaml
+```
+
+This saves the raw guide under `journal/`.
+
+If the response is HTML, it also creates:
+
+- `journal/guideline_notes.md`
+
+## 8. Create and edit a profile mapping
+
+Run:
+
+```bash
+python3 scripts/map_journal_profile.py config/engine.example.yaml
+```
+
+This creates:
+
+- `journal/profile_mapping.yaml`
+
+Review and edit that file so it matches the live journal guide.
+
+Then install the generated profile into the harness:
+
+```bash
+python3 scripts/install_harness_profile.py config/engine.example.yaml
+```
+
+## 9. Materialize the harness project
 
 ```bash
 python3 scripts/materialize_harness_project.py config/engine.example.yaml
@@ -88,7 +122,24 @@ This step:
 
 After that, you have a harness project ready for staged work.
 
-## 8. Run a preflight check
+## 10. Or run the setup sequence in one command
+
+```bash
+python3 scripts/run_setup.py config/engine.example.yaml
+```
+
+This runs:
+
+- workspace bootstrap
+- harness clone
+- journal intake
+- guide fetch when URL is present
+- profile mapping generation
+- harness profile install
+- harness project materialization
+- preflight check
+
+## 11. Run a preflight check
 
 ```bash
 python3 scripts/preflight_check.py config/engine.example.yaml
@@ -102,7 +153,7 @@ This checks:
 - harness path availability
 - Zotero availability
 
-## 9. Final handoff
+## 12. Final handoff
 
 When the manuscript is stable and the harness project has final outputs:
 
@@ -112,7 +163,7 @@ python3 scripts/assemble_author_handoff.py config/engine.example.yaml
 
 This wraps the harness submission assembly and creates a clean handoff bundle for the author.
 
-## 10. Current limitations
+## 13. Current limitations
 
 - no automatic journal-guide discovery from journal name alone
 - no universal statistical engine for arbitrary datasets

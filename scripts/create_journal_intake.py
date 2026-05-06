@@ -36,6 +36,7 @@ def main() -> None:
         "",
         f"- target journal: {cfg['journal']['target_name']}",
         f"- journal profile id: {cfg['journal'].get('profile_id', '')}",
+        f"- generated profile id: {cfg['journal'].get('generated_profile_id', '')}",
         f"- guideline url: {cfg['journal'].get('guideline_url', '')}",
         "- article type: ",
         "- abstract limit: ",
@@ -50,6 +51,7 @@ def main() -> None:
         "",
         "- Confirm journal instructions manually or paste them into `journal/guideline_notes.md`.",
         "- If a harness profile already exists, compare it with the live guide before final submission formatting.",
+        "- If the guide is downloaded, edit `profile_mapping.yaml` before installing a generated harness profile.",
     ]
     intake.write_text("\n".join(lines) + "\n", encoding="utf-8")
 

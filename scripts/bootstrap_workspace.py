@@ -38,12 +38,13 @@ def main() -> None:
         (project_root / subdir).mkdir(parents=True, exist_ok=True)
 
     shutil.copy2(config_path, project_root / "engine.snapshot.yaml")
-    for template_name in ["journal_intake.md", "study_blueprint.md", "idea_funnel.md"]:
+    for template_name in ["journal_intake.md", "study_blueprint.md", "idea_funnel.md", "profile_mapping.example.yaml"]:
         src = package_root / "templates" / template_name
         dest_name = {
             "journal_intake.md": "journal/journal_intake.md",
             "study_blueprint.md": "generated/study_blueprint.md",
             "idea_funnel.md": "generated/idea_funnel.md",
+            "profile_mapping.example.yaml": "journal/profile_mapping.example.yaml",
         }[template_name]
         shutil.copy2(src, project_root / dest_name)
 

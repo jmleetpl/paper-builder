@@ -32,6 +32,9 @@ Implemented now:
 - harness project materialization
 - pipeline runbook generation through the harness
 - journal intake scaffold
+- journal-guide downloader from explicit URL
+- profile-mapping template and harness-profile installer
+- one-command setup entrypoint
 - final author handoff assembly through the harness
 - preflight environment checks
 
@@ -72,10 +75,29 @@ Create a journal intake packet:
 python3 scripts/create_journal_intake.py config/engine.example.yaml
 ```
 
+Download the journal guide into the workspace:
+
+```bash
+python3 scripts/fetch_journal_guide.py config/engine.example.yaml
+```
+
+Create a profile mapping template and then install the generated harness profile:
+
+```bash
+python3 scripts/map_journal_profile.py config/engine.example.yaml
+python3 scripts/install_harness_profile.py config/engine.example.yaml
+```
+
 Materialize a harness-ready project and generate the staged pipeline:
 
 ```bash
 python3 scripts/materialize_harness_project.py config/engine.example.yaml
+```
+
+Or run the initial setup sequence in one command:
+
+```bash
+python3 scripts/run_setup.py config/engine.example.yaml
 ```
 
 Run a preflight check:
@@ -110,5 +132,5 @@ paper-builder/
 
 - The engine expects a compatible `manuscript-harness-kit` checkout.
 - By default it can clone the public harness repo into `vendor/`.
-- Journal auto-fetch from web is a future feature. For now the engine scaffolds a journal intake file and supports an explicit guideline URL.
+- The engine can download a journal guide from an explicit URL, but journal-name-only discovery is still a future feature.
 - RIS and Zotero-library workflows are supported through the harness, but live Zotero fields inside Word remain a user-environment step.
