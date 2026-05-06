@@ -1,0 +1,16 @@
+journals:
+  - id: "ijs"
+    display_name: "International Journal of Surgery"
+    aliases:
+      - "IJS"
+      - "Int J Surg"
+      - "international journal surgery"
+    guideline_url: "https://edmgr.ovid.com/ijs/accounts/ifauth.htm"
+    confidence: "high"
+  - id: "generic-original-research"
+    display_name: "Generic Original Research"
+    aliases:
+      - "generic"
+      - "generic journal"
+    guideline_url: ""
+    confidence: "fallback"

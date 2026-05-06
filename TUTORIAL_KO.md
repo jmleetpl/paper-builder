@@ -10,6 +10,7 @@
 - 워크스페이스 자동 생성
 - 하네스 clone 또는 연결
 - 하네스용 프로젝트 설정 파일 자동 생성
+- 저널 프로필 후보 discovery
 - 단계별 런북 생성
 - 최종 저자 핸드오프 폴더 조립
 
@@ -83,6 +84,19 @@ python3 scripts/create_journal_intake.py config/engine.example.yaml
 
 - 저널 이름만 넣으면 웹에서 저자 가이드라인을 자동 수집하는 기능은 미구현
 
+저널 이름 기준으로 로컬 프로필 후보를 찾는 discovery도 가능합니다.
+
+```bash
+python3 scripts/discover_journal.py config/engine.example.yaml
+```
+
+이 명령은:
+
+- `journal/discovery_report.json`
+- `journal/discovery_report.md`
+
+를 생성합니다.
+
 ## 7. 저널 가이드 내려받기
 
 `journal.guideline_url`이 설정돼 있으면:
@@ -138,6 +152,12 @@ python3 scripts/materialize_harness_project.py config/engine.example.yaml
 
 즉 이 단계가 끝나면, 실제 논문작업에 들어갈 하네스 프로젝트가 준비됩니다.
 
+다음 Codex 작업을 바로 시작할 수 있도록 stage packet도 만들 수 있습니다.
+
+```bash
+python3 scripts/prepare_stage_session.py config/engine.example.yaml 01_literature_scout
+```
+
 ## 10. 한 번에 초기 세팅하기
 
 ```bash
@@ -149,10 +169,12 @@ python3 scripts/run_setup.py config/engine.example.yaml
 - workspace 생성
 - harness clone
 - journal intake 생성
+- journal discovery
 - guideline URL이 있으면 guide fetch
 - profile mapping 생성
 - harness profile 설치
 - harness project 생성
+- 첫 stage session packet 생성
 - preflight check
 
 ## 11. 사전 점검
@@ -169,7 +191,25 @@ python3 scripts/preflight_check.py config/engine.example.yaml
 - 하네스 경로
 - Zotero 환경
 
-## 12. 최종 저자 핸드오프
+## 12. 구조화된 진행기록 남기기
+
+각 단계를 마칠 때:
+
+```bash
+python3 scripts/record_stage_run.py \
+  config/engine.example.yaml \
+  01_literature_scout \
+  completed \
+  --summary "문헌조사와 검색로그 완료"
+```
+
+그 다음 전체 요약 생성:
+
+```bash
+python3 scripts/summarize_run.py config/engine.example.yaml
+```
+
+## 13. 최종 저자 핸드오프
 
 원고와 제출 파일이 정리된 뒤:
 
@@ -179,11 +219,17 @@ python3 scripts/assemble_author_handoff.py config/engine.example.yaml
 
 이 명령은 하네스의 제출 폴더 조립 기능을 감싸서, 저자가 바로 확인할 수 있는 최종 핸드오프 묶음을 만들어 줍니다.
 
-## 13. 현재 한계
+최종 핸드오프 묶음 검증:
 
-- 저널 이름만으로 author guideline 자동 수집은 아직 없음
+```bash
+python3 scripts/validate_submission_packet.py config/engine.example.yaml
+```
+
+## 14. 현재 한계
+
+- 저널 이름 기반 discovery는 로컬 프로필/별칭 매칭 중심이며, 완전한 웹 discovery는 아직 없음
 - 임의 스키마 데이터에 대한 범용 통계엔진은 아직 없음
 - Word 안의 live Zotero field 자동 삽입은 아직 없음
 - 완전 무인 end-to-end 논문 생성기는 아직 아님
 
-즉 현재 버전은 **실전용 오케스트레이터 v0.2**에 가깝습니다.
+즉 현재 버전은 **실전용 오케스트레이터 v0.3**에 가깝습니다.

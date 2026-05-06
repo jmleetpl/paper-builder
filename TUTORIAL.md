@@ -12,6 +12,7 @@ It helps you:
 - create a clean workspace
 - link the harness core
 - generate a harness-ready project
+- discover likely journal profiles
 - prepare journal intake and handoff packets
 
 ## 2. Install requirements
@@ -73,6 +74,17 @@ It does:
 - save the journal name and optional guideline URL
 - optionally snapshot a matching harness profile if one is already known
 
+You can also generate a journal-discovery report from the journal name:
+
+```bash
+python3 scripts/discover_journal.py config/engine.example.yaml
+```
+
+This creates:
+
+- `journal/discovery_report.json`
+- `journal/discovery_report.md`
+
 ## 7. Download the journal guide
 
 If `journal.guideline_url` is set:
@@ -122,6 +134,12 @@ This step:
 
 After that, you have a harness project ready for staged work.
 
+You can also generate a stage-session packet for the next Codex task:
+
+```bash
+python3 scripts/prepare_stage_session.py config/engine.example.yaml 01_literature_scout
+```
+
 ## 10. Or run the setup sequence in one command
 
 ```bash
@@ -133,10 +151,12 @@ This runs:
 - workspace bootstrap
 - harness clone
 - journal intake
+- journal discovery
 - guide fetch when URL is present
 - profile mapping generation
 - harness profile install
 - harness project materialization
+- first stage session packet
 - preflight check
 
 ## 11. Run a preflight check
@@ -153,7 +173,25 @@ This checks:
 - harness path availability
 - Zotero availability
 
-## 12. Final handoff
+## 12. Record structured stage progress
+
+As stages are completed, record them in a structured run log:
+
+```bash
+python3 scripts/record_stage_run.py \
+  config/engine.example.yaml \
+  01_literature_scout \
+  completed \
+  --summary "Completed literature map and search log"
+```
+
+Then build a compact pipeline summary:
+
+```bash
+python3 scripts/summarize_run.py config/engine.example.yaml
+```
+
+## 13. Final handoff
 
 When the manuscript is stable and the harness project has final outputs:
 
@@ -163,9 +201,15 @@ python3 scripts/assemble_author_handoff.py config/engine.example.yaml
 
 This wraps the harness submission assembly and creates a clean handoff bundle for the author.
 
-## 13. Current limitations
+Validate that handoff packet:
 
-- no automatic journal-guide discovery from journal name alone
+```bash
+python3 scripts/validate_submission_packet.py config/engine.example.yaml
+```
+
+## 14. Current limitations
+
+- journal-name discovery is local and profile-based, not full web discovery
 - no universal statistical engine for arbitrary datasets
 - no automatic live Zotero fields in Word
 - no fully autonomous manuscript generation without review gates

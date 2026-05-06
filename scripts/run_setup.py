@@ -31,12 +31,14 @@ def main() -> None:
     run(["python3", "scripts/bootstrap_workspace.py", str(config_path)], package_root)
     run(["python3", "scripts/clone_harness.py"], package_root)
     run(["python3", "scripts/create_journal_intake.py", str(config_path)], package_root)
+    run(["python3", "scripts/discover_journal.py", str(config_path)], package_root)
     if cfg["journal"].get("guideline_url") and not args.skip_fetch:
         run(["python3", "scripts/fetch_journal_guide.py", str(config_path)], package_root)
     run(["python3", "scripts/map_journal_profile.py", str(config_path)], package_root)
     run(["python3", "scripts/install_harness_profile.py", str(config_path)], package_root)
     if not args.skip_materialize:
         run(["python3", "scripts/materialize_harness_project.py", str(config_path)], package_root)
+        run(["python3", "scripts/prepare_stage_session.py", str(config_path), "01_literature_scout"], package_root)
     run(["python3", "scripts/preflight_check.py", str(config_path)], package_root)
 
 

@@ -35,6 +35,10 @@ Implemented now:
 - journal-guide downloader from explicit URL
 - profile-mapping template and harness-profile installer
 - one-command setup entrypoint
+- journal-name-based discovery report
+- stage-session packet generation
+- structured run logging and summary
+- submission packet validation
 - final author handoff assembly through the harness
 - preflight environment checks
 
@@ -75,6 +79,12 @@ Create a journal intake packet:
 python3 scripts/create_journal_intake.py config/engine.example.yaml
 ```
 
+Discover likely harness journal profiles from the journal name:
+
+```bash
+python3 scripts/discover_journal.py config/engine.example.yaml
+```
+
 Download the journal guide into the workspace:
 
 ```bash
@@ -100,6 +110,19 @@ Or run the initial setup sequence in one command:
 python3 scripts/run_setup.py config/engine.example.yaml
 ```
 
+Prepare a focused stage session packet:
+
+```bash
+python3 scripts/prepare_stage_session.py config/engine.example.yaml 01_literature_scout
+```
+
+Record stage progress and build a structured pipeline summary:
+
+```bash
+python3 scripts/record_stage_run.py config/engine.example.yaml 01_literature_scout completed --summary "Completed search log and evidence table"
+python3 scripts/summarize_run.py config/engine.example.yaml
+```
+
 Run a preflight check:
 
 ```bash
@@ -112,6 +135,12 @@ After the manuscript is finalized, assemble an author handoff folder:
 python3 scripts/assemble_author_handoff.py config/engine.example.yaml
 ```
 
+Validate the final submission packet:
+
+```bash
+python3 scripts/validate_submission_packet.py config/engine.example.yaml
+```
+
 ## Package structure
 
 ```text
@@ -119,6 +148,7 @@ paper-builder/
 ├── .agents/
 ├── plugins/
 ├── config/
+├── data/
 ├── examples/
 ├── scripts/
 ├── templates/
@@ -132,5 +162,5 @@ paper-builder/
 
 - The engine expects a compatible `manuscript-harness-kit` checkout.
 - By default it can clone the public harness repo into `vendor/`.
-- The engine can download a journal guide from an explicit URL, but journal-name-only discovery is still a future feature.
+- The engine supports local journal-name discovery against known harness profiles and aliases, but full web-based discovery is still a future feature.
 - RIS and Zotero-library workflows are supported through the harness, but live Zotero fields inside Word remain a user-environment step.
