@@ -1,0 +1,42 @@
+project:
+  slug: "kqips-grade2-pneumonia"
+  title: "Prediction of Treatment-Requiring Postoperative Pneumonia in KQIPS"
+  topic: "Postoperative pneumonia prediction"
+  study_question: "Can treatment-requiring postoperative pneumonia be predicted in the Korean Quality Improvement Program for Surgery?"
+  study_design: "Retrospective national registry-based prediction model study"
+  reporting_language: "en"
+  progress_report_language: "ko"
+
+data:
+  primary_dataset: "/absolute/path/to/kqips.csv"
+  dictionary: "/absolute/path/to/variable_dictionary.csv"
+  metadata: "/absolute/path/to/meta.json"
+
+analysis:
+  primary_outcome: "Clavien-Dindo grade II or higher postoperative pneumonia"
+  candidate_predictor_count: 48
+  preferred_models:
+    - logistic_regression
+    - random_forest
+    - xgboost
+    - lightgbm
+  internal_validation:
+    - chronological_split
+    - cross_validation
+    - bootstrap_optimism
+    - grouped_site_validation
+
+journal:
+  target_name: "International Journal of Surgery"
+  profile_id: "ijs"
+  guideline_url: "https://edmgr.ovid.com/ijs/accounts/ifauth.htm"
+
+harness:
+  mode: "git"
+  local_path: ""
+  repo_url: "https://github.com/jmleetpl/manuscript-harness-kit.git"
+  branch: "main"
+
+paths:
+  workspace_root: "./workspaces"
+  vendor_root: "./vendor"

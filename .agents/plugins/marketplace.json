@@ -1,0 +1,20 @@
+{
+  "name": "paper-builder",
+  "interface": {
+    "displayName": "Paper Builder"
+  },
+  "plugins": [
+    {
+      "name": "paper-builder",
+      "source": {
+        "source": "local",
+        "path": "./plugins/paper-builder"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

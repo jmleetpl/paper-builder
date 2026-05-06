@@ -1,0 +1,40 @@
+{
+  "name": "paper-builder",
+  "version": "0.1.0",
+  "description": "Codex orchestration layer for launching manuscript projects on top of manuscript-harness-kit.",
+  "author": {
+    "name": "jmleetpl",
+    "email": "jmleetpl@gmail.com",
+    "url": "https://github.com/jmleetpl"
+  },
+  "homepage": "https://github.com/jmleetpl/paper-builder",
+  "repository": "https://github.com/jmleetpl/paper-builder",
+  "license": "MIT",
+  "keywords": [
+    "manuscript",
+    "research",
+    "workflow",
+    "orchestration"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Paper Builder",
+    "shortDescription": "Launch and orchestrate manuscript projects on top of the harness core",
+    "longDescription": "Workspace bootstrap, harness linking, config translation, pipeline generation, and author handoff assembly for manuscript projects.",
+    "developerName": "jmleetpl",
+    "category": "Productivity",
+    "capabilities": [
+      "Write",
+      "Analyze",
+      "Plan"
+    ],
+    "websiteURL": "https://github.com/jmleetpl/paper-builder",
+    "privacyPolicyURL": "https://github.com/jmleetpl/paper-builder/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/jmleetpl/paper-builder/blob/main/LICENSE",
+    "defaultPrompt": [
+      "Launch a new manuscript workspace from a topic, dataset, and target journal.",
+      "Create a harness-ready project and generate a staged pipeline runbook.",
+      "Assemble a final author handoff folder for a completed manuscript."
+    ]
+  }
+}
